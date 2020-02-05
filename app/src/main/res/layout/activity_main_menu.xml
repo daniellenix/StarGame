@@ -4,6 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/galaxy"
     tools:context=".MainMenu">
+
+    <Button
+        android:id="@+id/buttonPlayGame"
+        android:layout_width="131dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="39dp"
+        android:background="@android:color/transparent"
+        android:text="@string/play_game"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOptions"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="297dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="679dp" />
+
+    <Button
+        android:id="@+id/buttonOptions"
+        android:layout_width="147dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="40dp"
+        android:background="@android:color/transparent"
+        android:text="@string/options"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonHelp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonPlayGame"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="@+id/buttonPlayGame" />
+
+    <Button
+        android:id="@+id/buttonHelp"
+        android:layout_width="148dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/transparent"
+        android:text="@string/help"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/buttonOptions"
+        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintStart_toStartOf="@+id/buttonOptions" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="311dp"
+        android:layout_height="217dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toEndOf="@+id/buttonOptions"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.537"
+        app:srcCompat="@drawable/tarot" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
