@@ -2,8 +2,6 @@ package com.example.cmpt276a3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +19,7 @@ public class MainMenu extends AppCompatActivity {
     }
 
     private void playGame() {
-        Button btn = findViewById(R.id.buttonPlayGame);
+        Button btn = findViewById(R.id.buttonSkip);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
