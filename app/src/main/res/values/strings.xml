@@ -3,4 +3,14 @@
     <string name="play_game">Play Game</string>
     <string name="help">Help</string>
     <string name="options">Options</string>
+    <string name="_4_x_6">4 x 6</string>
+    <string name="_5_x_10">5 x 10</string>
+    <string name="_6_x_15">6 x 15</string>
+    <string name="_6_stars">6 stars</string>
+    <string name="_15_stars">15 stars</string>
+    <string name="_10_stars">10 stars</string>
+    <string name="_20_stars">20 stars</string>
+    <string name="board_size">Board Size</string>
+    <string name="of_stars"># of stars</string>
+    <string name="erase_times_played">Erase times played</string>
 </resources>

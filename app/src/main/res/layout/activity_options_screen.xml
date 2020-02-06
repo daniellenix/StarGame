@@ -15,18 +15,19 @@
         app:layout_constraintGuide_percent="0.03953148" />
 
     <RadioGroup
-        android:layout_width="135dp"
-        android:layout_height="107dp"
+        android:id="@+id/boardSize"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        tools:layout_editor_absoluteY="103dp">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
             android:id="@+id/radioButtonFirst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#fff"
-            android:text="4 x 6"
+            android:text="@string/_4_x_6"
             android:textColor="#fff"
             android:textSize="22sp" />
 
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#fff"
-            android:text="5 x 10"
+            android:text="@string/_5_x_10"
             android:textColor="#fff"
             android:textSize="22sp" />
 
@@ -44,52 +45,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#fff"
-            android:text="6 x 15"
+            android:text="@string/_6_x_15"
             android:textColor="#fff"
             android:textSize="22sp" />
     </RadioGroup>
 
     <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="172dp"
-        android:layout_height="129dp"
+        android:id="@+id/numOfStars"
+        android:layout_width="170dp"
+        android:layout_height="153dp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2"
-        tools:layout_editor_absoluteY="92dp">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.77">
 
         <RadioButton
-            android:id="@+id/radioButton6"
+            android:id="@+id/radioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#fff"
-            android:text="6 stars"
+            android:text="@string/_6_stars"
             android:textColor="#fff"
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/radioButton7"
+            android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#fff"
-            android:text="10 stars"
+            android:text="@string/_10_stars"
             android:textColor="#fff"
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/radioButton8"
+            android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#fff"
-            android:text="15 stars"
+            android:text="@string/_15_stars"
             android:textColor="#fff"
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/radioButton9"
+            android:id="@+id/radioButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#fff"
-            android:text="20 stars"
+            android:text="@string/_20_stars"
             android:textColor="#fff"
             android:textSize="20sp" />
     </RadioGroup>
@@ -101,11 +103,11 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="48dp"
-        android:text="Board Size"
+        android:text="@string/board_size"
         android:textColor="#fff"
         android:textSize="22sp"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
@@ -114,21 +116,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
-        android:text="# of stars"
+        android:layout_marginEnd="160dp"
+        android:layout_marginRight="160dp"
+        android:text="@string/of_stars"
         android:textColor="#fff"
         android:textSize="22sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/eraseTimesPlayed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:background="@android:color/transparent"
-        android:text="Erase times played"
+        android:text="@string/erase_times_played"
         android:textColor="#fff"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
