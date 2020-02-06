@@ -9,8 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainMenu"></activity>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".helpScreen"
+            android:label="Help"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".MainMenu" />
+        <activity
+            android:name=".MainActivity"
             android:label="Main Menu"
             android:screenOrientation="landscape">
             <intent-filter>
