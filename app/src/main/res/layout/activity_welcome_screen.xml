@@ -41,5 +41,15 @@
             android:layout_marginEnd="276dp" android:layout_marginRight="276dp" android:layout_marginBottom="7dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
+    <ImageView
+            android:layout_width="434dp"
+            android:layout_height="214dp" app:srcCompat="@drawable/fullmoon"
+            android:id="@+id/imageView5" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_Title" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="125dp" android:layout_marginRight="125dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="125dp"
+            android:layout_marginStart="125dp"
+            app:layout_constraintHorizontal_bias="1.0"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
