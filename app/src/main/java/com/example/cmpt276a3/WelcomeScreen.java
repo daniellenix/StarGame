@@ -5,23 +5,47 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 public class WelcomeScreen extends AppCompatActivity{
-    TextView text_animation;
-    TextView names_animation;
-    Button btn = findViewById(R.id.buttonSkip);
+    Animation rotateAnimation;
+    Animation bounceAnimation;
+    Animation fadeInAnimation;
+    Animation blinkAnimation;
+
+    Button btn;
+    ImageView star_circle;
+    TextView bounceTextView;
+    TextView fadeInTextView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
         //overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-        skip();
-        toFade(text_animation);
-        toScale(names_animation);
-        tapToSlideOut(btn);
 
+        star_circle= (ImageView)findViewById(R.id.star_circle);
+        rotateAnimation();
+
+        bounceTextView = (TextView)findViewById(R.id.welcome_Title);
+        bounceAnimation();
+
+        fadeInTextView = (TextView)findViewById(R.id.author_Names);
+        fadeInAnimation();
+
+        btn = (Button)findViewById(R.id.buttonSkip);
+        blinkAnimation();
+        //Animation bounce = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        //Animation fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        //Animation blink = AnimationUtils.loadAnimation(this, R.anim.blink);
+        //Button btn = findViewById(R.id.buttonSkip);
+
+        skip();
     }
 
     private void skip() {
@@ -35,22 +59,25 @@ public class WelcomeScreen extends AppCompatActivity{
         });
     }
 
-    private void toFade(View view){
-        text_animation = findViewById(R.id.welcome_Title);
-        Animation fade_in_animation = AnimationUtils.loadAnimation(this,R.anim.fade_in);
-        text_animation.startAnimation(fade_in_animation);
+    private void rotateAnimation(){
+        rotateAnimation = AnimationUtils.loadAnimation(this,R.anim.rotate);
+        star_circle.startAnimation(rotateAnimation);
+
     }
 
-    private void toScale(View view){
-        names_animation = findViewById(R.id.author_Names);
-        Animation scale_animation = AnimationUtils.loadAnimation(this,R.anim.scale);
-        names_animation.startAnimation(scale_animation);
+    private void bounceAnimation(){
+        bounceAnimation = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        bounceTextView.startAnimation(bounceAnimation);
     }
 
-    private void tapToSlideOut(View view){
-        Button btn = findViewById(R.id.buttonSkip);
-        Animation slide_animation = AnimationUtils.loadAnimation(this,R.anim.slide_out);
-        btn.startAnimation(slide_animation);
+    private void fadeInAnimation(){
+        fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fadeInTextView.startAnimation(fadeInAnimation);
+    }
+
+    private void blinkAnimation(){
+        blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink);
+        btn.startAnimation(blinkAnimation);
     }
 
 }
