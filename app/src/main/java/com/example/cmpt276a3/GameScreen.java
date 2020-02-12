@@ -59,8 +59,6 @@ public class GameScreen extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                button.setText("" + col + "," + row);
-
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
 
@@ -87,12 +85,6 @@ public class GameScreen extends AppCompatActivity {
         // Lock Button Sizes:
         lockButtonSizes();
 
-        // Does not scale image.
-//    	button.setBackgroundResource(R.drawable.action_lock_pink);
-
-        // Scale image to button: Only works in JellyBean!
-        // Image from Crystal Clear icon set, under LGPL
-        // http://commons.wikimedia.org/wiki/Crystal_Clear
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.star);
