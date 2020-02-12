@@ -2,11 +2,19 @@ package com.example.cmpt276a3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity {
+
+    public static Intent makeIntent(Context context) {
+        Intent intent =  new Intent(context, MainMenu.class);
+        return intent;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +42,8 @@ public class MainMenu extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = ThirdActivity.makeIntent(WelcomeScreen.this);
-//                startActivityForResult(intent, 1);
+                Intent intent = OptionsScreen.makeIntent(MainMenu.this);
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -45,8 +53,8 @@ public class MainMenu extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = ThirdActivity.makeIntent(WelcomeScreen.this);
-//                startActivityForResult(intent, 1);
+                Intent intent = HelpScreen.makeIntent(MainMenu.this);
+                startActivityForResult(intent, 1);
             }
         });
     }
