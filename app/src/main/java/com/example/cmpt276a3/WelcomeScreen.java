@@ -22,7 +22,6 @@ public class WelcomeScreen extends AppCompatActivity{
     TextView bounceTextView;
     TextView fadeInTextView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
