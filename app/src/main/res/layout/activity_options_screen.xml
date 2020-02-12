@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/galaxy2"
+    tools:context=".OptionsScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03953148" />
+
+    <RadioGroup
+        android:id="@+id/boardSize"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <RadioButton
+            android:id="@+id/radioButtonFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#fff"
+            android:text="@string/_4_x_6"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#fff"
+            android:text="@string/_5_x_10"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonThird"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#fff"
+            android:text="@string/_6_x_15"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/numOfStars"
+        android:layout_width="170dp"
+        android:layout_height="153dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.77">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#fff"
+            android:text="@string/_6_stars"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#fff"
+            android:text="@string/_10_stars"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#fff"
+            android:text="@string/_15_stars"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#fff"
+            android:text="@string/_20_stars"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/board_size"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginRight="160dp"
+        android:text="@string/of_stars"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/eraseTimesPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:background="@android:color/transparent"
+        android:text="@string/erase_times_played"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="0dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
