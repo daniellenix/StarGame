@@ -11,16 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".GameScreen"
+            android:screenOrientation="landscape" ></activity>
+        <activity
             android:name=".OptionsScreen"
             android:label="Options Screen"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MainMenu"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".HelpScreen"
             android:label="Help"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".WelcomeScreen"
             android:label="Main Menu"

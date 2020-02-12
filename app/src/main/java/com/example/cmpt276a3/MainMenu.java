@@ -31,8 +31,8 @@ public class MainMenu extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = ThirdActivity.makeIntent(WelcomeScreen.this);
-//                startActivityForResult(intent, 1);
+                Intent intent = GameScreen.makeIntent(MainMenu.this);
+                startActivityForResult(intent, 1);
             }
         });
     }
