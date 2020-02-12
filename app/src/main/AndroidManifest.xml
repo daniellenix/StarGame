@@ -19,7 +19,7 @@
             android:label="Help"
             android:screenOrientation="landscape"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".WelcomeScreen"
             android:label="Main Menu"
             android:screenOrientation="landscape">
             <intent-filter>
