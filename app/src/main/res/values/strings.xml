@@ -13,4 +13,5 @@
     <string name="board_size">Board Size</string>
     <string name="of_stars"># of stars</string>
     <string name="erase_times_played">Erase times played</string>
+    <string name="action_settings" />
 </resources>
