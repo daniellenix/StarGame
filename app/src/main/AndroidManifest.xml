@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".GameScreen"
+            android:label="Game Screen"
             android:screenOrientation="landscape" ></activity>
         <activity
             android:name=".OptionsScreen"
@@ -19,6 +20,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".MainMenu"
+            android:label="Main Menu"
             android:screenOrientation="landscape" />
         <activity
             android:name=".HelpScreen"
