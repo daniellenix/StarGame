@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".helpScreen"
+    tools:context=".HelpScreen"
     android:background="@drawable/galaxy3">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
-        android:text="@string/created_by_mahek_khan_and_danielle_nix"
+        android:text="created_by_mahek_khan_and_danielle_nix"
         android:textColor="#fff"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
