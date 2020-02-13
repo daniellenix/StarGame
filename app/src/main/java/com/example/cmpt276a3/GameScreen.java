@@ -29,7 +29,7 @@ public class GameScreen extends AppCompatActivity {
     private CellManager manager = CellManager.getInstance();
     private Options data = Options.getInstance();
 
-    Button buttons[][] = new Button[data.getRow()][data.getCol()];
+    Button buttons[][] = new Button[data.getRow()][data.getColumn()];
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
@@ -55,7 +55,7 @@ public class GameScreen extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < data.getCol(); col++){
+            for (int col = 0; col < data.getColumn(); col++){
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -108,7 +108,7 @@ public class GameScreen extends AppCompatActivity {
 
     private void lockButtonSizes() {
         for (int row = 0; row < data.getRow(); row++) {
-            for (int col = 0; col < data.getCol(); col++) {
+            for (int col = 0; col < data.getColumn(); col++) {
                 Button button = buttons[row][col];
 
                 int width = button.getWidth();
