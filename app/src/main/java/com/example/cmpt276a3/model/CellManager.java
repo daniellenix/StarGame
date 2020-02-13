@@ -25,7 +25,16 @@ public class CellManager {
     private void generateStarsRandomly(){
         boolean isStarInCell = false;
 
+        int row = data.getRow();
+        int column = data.getCol();
+        int totalNumberOfCells = row*column;
+
+        int index = randomGenerator.nextInt(totalNumberOfCells);
+
         while(!isStarInCell){
+
+
+
 
         }
     }
