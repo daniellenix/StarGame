@@ -3,7 +3,17 @@ package com.example.cmpt276a3.model;
 public class Options {
     private int row;
     private int col;
-    private int numberOfMines;
+    private int numberOfStars;
+    private static Options instance;
+
+    Options(int row, int column){
+
+
+    }
+
+    public static Options getInstance() {
+        return instance;
+    }
 
     public int getRow() {
         return row;
@@ -21,11 +31,11 @@ public class Options {
         this.col = col;
     }
 
-    public int getNumberOfMines() {
-        return numberOfMines;
+    public int getNumberOfStars() {
+        return numberOfStars;
     }
 
     public void setNumberOfMines(int numberOfMines) {
-        this.numberOfMines = numberOfMines;
+        this.numberOfStars = numberOfMines;
     }
 }

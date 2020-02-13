@@ -1,7 +1,34 @@
 package com.example.cmpt276a3.model;
 
-public class CellManager {
+import java.util.Random;
 
-    private Cell[][] gameBoard;
+public class CellManager {
+    private static Random randomGenerator = new Random();
+    private Cell[][] grid;
+    private int starInRow;
+    private int starInColumn;
+    private Options data = Options.getInstance();
+
+    //Singleton Class
+    private CellManager(){
+        generateStarsRandomly();
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
+    private void updateCell(){
+        generateStarsRandomly();
+    }
+
+    private void generateStarsRandomly(){
+        boolean isStarInCell = false;
+
+        while(!isStarInCell){
+
+        }
+    }
+
 
 }
