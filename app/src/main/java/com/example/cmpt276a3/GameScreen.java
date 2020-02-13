@@ -18,12 +18,18 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.example.cmpt276a3.model.CellManager;
+import com.example.cmpt276a3.model.Options;
+
 public class GameScreen extends AppCompatActivity {
 
-    private static final int NUM_ROWS = 7;
-    private static final int NUM_COLS = 10;
+//    private static final int NUM_ROWS = 7;
+//    private static final int NUM_COLS = 10;
 
-    Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
+    private CellManager manager = CellManager.getInstance();
+    private Options data = Options.getInstance();
+
+    Button buttons[][] = new Button[data.getRow()][data.getCol()];
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);

@@ -9,11 +9,18 @@ public class CellManager {
     private int starInRow;
     private int starInColumn;
 
-    private Options data = Options.getInstance();
+    private static CellManager instance;
 
     //Singleton Class
     private CellManager(){
         generateStarsRandomly();
+    }
+
+    public static CellManager getInstance() {
+        if(instance == null) {
+            instance = new CellManager();
+        }
+        return instance;
     }
 
     public Cell[][] getGrid() {
