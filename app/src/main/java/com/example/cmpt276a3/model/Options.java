@@ -2,8 +2,16 @@ package com.example.cmpt276a3.model;
 
 public class Options {
     private int row;
-    private int col;
-    private int numberOfMines;
+    private int column;
+    private int numberOfStars;
+    private static Options instance;
+
+    public static Options getInstance() {
+        if(instance == null) {
+            instance = new Options();
+        }
+        return instance;
+    }
 
     public int getRow() {
         return row;
@@ -13,19 +21,19 @@ public class Options {
         this.row = row;
     }
 
-    public int getCol() {
-        return col;
+    public int getColumn() {
+        return column;
     }
 
-    public void setCol(int col) {
-        this.col = col;
+    public void setColumn(int column) {
+        this.column = column;
     }
 
-    public int getNumberOfMines() {
-        return numberOfMines;
+    public int getNumberOfStars() {
+        return numberOfStars;
     }
 
-    public void setNumberOfMines(int numberOfMines) {
-        this.numberOfMines = numberOfMines;
+    public void setNumberOfStars(int numberOfStars) {
+        this.numberOfStars = numberOfStars;
     }
 }

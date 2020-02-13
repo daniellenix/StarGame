@@ -1,13 +1,37 @@
 package com.example.cmpt276a3.model;
 
 public class Cell {
-    private boolean hasMine;
     private int row;
-    private int col;
+    private int column;
+    private boolean hasStar;
 
-    public Cell(boolean hasMine, int row, int col) {
-        this.hasMine = hasMine;
+    public Cell(int row, int column, boolean hasStar) {
         this.row = row;
-        this.col = col;
+        this.column = column;
+        this.hasStar = hasStar;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public boolean isHasStar() {
+        return hasStar;
+    }
+
+    public void setHasStar(boolean hasStar) {
+        this.hasStar = hasStar;
     }
 }

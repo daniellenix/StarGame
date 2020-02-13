@@ -18,12 +18,18 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.example.cmpt276a3.model.CellManager;
+import com.example.cmpt276a3.model.Options;
+
 public class GameScreen extends AppCompatActivity {
 
-    private static final int NUM_ROWS = 7;
-    private static final int NUM_COLS = 10;
+//    private static final int NUM_ROWS = 7;
+//    private static final int NUM_COLS = 10;
 
-    Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
+    private CellManager manager = CellManager.getInstance();
+    private Options data = Options.getInstance();
+
+    Button buttons[][] = new Button[data.getRow()][data.getColumn()];
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
@@ -41,7 +47,7 @@ public class GameScreen extends AppCompatActivity {
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
 
-        for (int row = 0; row < NUM_ROWS; row++) {
+        for (int row = 0; row < data.getRow(); row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -49,7 +55,7 @@ public class GameScreen extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < NUM_COLS; col++){
+            for (int col = 0; col < data.getColumn(); col++){
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -101,8 +107,8 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void lockButtonSizes() {
-        for (int row = 0; row < NUM_ROWS; row++) {
-            for (int col = 0; col < NUM_COLS; col++) {
+        for (int row = 0; row < data.getRow(); row++) {
+            for (int col = 0; col < data.getColumn(); col++) {
                 Button button = buttons[row][col];
 
                 int width = button.getWidth();
