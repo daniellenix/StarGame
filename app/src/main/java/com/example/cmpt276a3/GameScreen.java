@@ -26,10 +26,11 @@ public class GameScreen extends AppCompatActivity {
 //    private static final int NUM_ROWS = 7;
 //    private static final int NUM_COLS = 10;
 
-    private CellManager manager = CellManager.getInstance();
-    private Options data = Options.getInstance();
+    private CellManager cellManager = CellManager.getInstance();
+    private Options options = Options.getInstance();
 
-    Button buttons[][] = new Button[data.getRow()][data.getColumn()];
+
+    Button buttons[][] = new Button[options.getRow()][options.getColumn()];
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
@@ -42,12 +43,13 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.activity_game_screen);
 
         populateButtons();
+
     }
 
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
 
-        for (int row = 0; row < data.getRow(); row++) {
+        for (int row = 0; row < options.getRow(); row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -55,7 +57,7 @@ public class GameScreen extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < data.getColumn(); col++){
+            for (int col = 0; col < options.getColumn(); col++){
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -107,8 +109,8 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void lockButtonSizes() {
-        for (int row = 0; row < data.getRow(); row++) {
-            for (int col = 0; col < data.getColumn(); col++) {
+        for (int row = 0; row < options.getRow(); row++) {
+            for (int col = 0; col < options.getColumn(); col++) {
                 Button button = buttons[row][col];
 
                 int width = button.getWidth();

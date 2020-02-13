@@ -4,6 +4,7 @@ public class Options {
     private int row;
     private int column;
     private int numberOfStars;
+
     private static Options instance;
 
     public static Options getInstance() {
