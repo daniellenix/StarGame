@@ -26,10 +26,10 @@ public class GameScreen extends AppCompatActivity {
 //    private static final int NUM_ROWS = 7;
 //    private static final int NUM_COLS = 10;
 
-    private CellManager manager = CellManager.getInstance();
-    private Options data = Options.getInstance();
+    private CellManager manager;
+    private Options data;
 
-    Button buttons[][] = new Button[data.getRow()][data.getCol()];
+    Button buttons[][];
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
@@ -85,6 +85,7 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void gridButtonClicked(int col, int row) {
         Toast.makeText(this, "Button clicked: " + col + "," + row,
@@ -122,6 +123,16 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
+    //use classes
+    private void gameData(){
+
+    }
+
+    
+    // get score and save it, get scans used
+    private void getScore(){
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
