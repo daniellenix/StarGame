@@ -4,14 +4,13 @@ public class Options {
     private int row;
     private int col;
     private int numberOfStars;
+
     private static Options instance;
 
-    Options(int row, int column){
-
-
-    }
-
     public static Options getInstance() {
+        if(instance == null) {
+            instance = new Options();
+        }
         return instance;
     }
 
