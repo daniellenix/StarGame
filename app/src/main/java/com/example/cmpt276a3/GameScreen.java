@@ -59,6 +59,9 @@ public class GameScreen extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
+                // text on buttons
+                button.setText("" + col + "," + row);
+
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
 
