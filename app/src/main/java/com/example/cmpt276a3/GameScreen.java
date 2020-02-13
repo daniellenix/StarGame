@@ -47,7 +47,7 @@ public class GameScreen extends AppCompatActivity {
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
 
-        for (int row = 0; row < NUM_ROWS; row++) {
+        for (int row = 0; row < data.getRow(); row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -55,7 +55,7 @@ public class GameScreen extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < NUM_COLS; col++){
+            for (int col = 0; col < data.getCol(); col++){
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -107,8 +107,8 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void lockButtonSizes() {
-        for (int row = 0; row < NUM_ROWS; row++) {
-            for (int col = 0; col < NUM_COLS; col++) {
+        for (int row = 0; row < data.getRow(); row++) {
+            for (int col = 0; col < data.getCol(); col++) {
                 Button button = buttons[row][col];
 
                 int width = button.getWidth();
