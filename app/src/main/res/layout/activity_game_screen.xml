@@ -62,7 +62,7 @@
         app:layout_constraintGuide_begin="656dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/scansUsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline11" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/foundStars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
@@ -86,7 +86,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/timesPlayed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Times played: "

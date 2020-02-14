@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cmpt276a3.model.CellManager;
@@ -39,6 +40,22 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.activity_game_screen);
 
         populateButtons();
+        refreshScreen();
+    }
+
+    private void refreshScreen() {
+        TextView starsFound = findViewById(R.id.foundStars);
+        int numStars = OptionsScreen.getNumberOfStars(this);
+        starsFound.setText("Found 0 of " + numStars);
+
+        // TODO: set scans used and times played
+        TextView numOfScans = findViewById(R.id.scansUsed);
+//        int numStars = OptionsScreen.getNumberOfStars(this);
+//        starsFound.setText("Found 0 of " + numStars);
+
+        TextView timesPlayed = findViewById(R.id.timesPlayed);
+//        int numStars = OptionsScreen.getNumberOfStars(this);
+//        starsFound.setText("Found 0 of " + numStars);
     }
 
     private void populateButtons() {
@@ -62,7 +79,7 @@ public class GameScreen extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                // text on buttons
+                // text on buttons before pressed
                 button.setText("" + col + "," + row);
 
                 // Make text not clip on small buttons
@@ -93,12 +110,13 @@ public class GameScreen extends AppCompatActivity {
 
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
+
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.star);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
-        // Change text on button:
+        // text on buttons once pressed
         button.setText("" + col);
 
     }

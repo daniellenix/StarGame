@@ -125,6 +125,16 @@ public class OptionsScreen extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("Number of Stars", numStar);
         editor.apply();
+
+        if(numStar == 6) {
+            options.setNumberOfStars(6);
+        } else if(numStar == 10) {
+            options.setNumberOfStars(10);
+        } else if(numStar == 15) {
+            options.setNumberOfStars(15);
+        } else if(numStar == 20) {
+            options.setNumberOfStars(20);
+        }
     }
 
     static public int getNumberOfStars(Context context) {
