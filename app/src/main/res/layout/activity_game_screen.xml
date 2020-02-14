@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/galaxy"
-    tools:context=".GameScreen">
+    tools:context=".GameScreen"
+    android:background="@drawable/galaxy">
 
     <TableLayout
         android:id="@+id/tableForButtons"

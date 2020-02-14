@@ -1,4 +1,8 @@
 package com.example.cmpt276a3;
 
-public class AlertScreen {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AlertScreen extends AppCompatActivity {
+
+    
 }

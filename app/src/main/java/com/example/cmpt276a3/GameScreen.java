@@ -25,11 +25,14 @@ public class GameScreen extends AppCompatActivity {
 
 //    private static final int NUM_ROWS = 7;
 //    private static final int NUM_COLS = 10;
+    private int ROWS;
+    private int COLS;
+    private int STARS;
 
-    private CellManager manager;
-    private Options data;
+    private CellManager manager = CellManager.getInstance();
+    private Options data = Options.getInstance();
 
-    Button buttons[][];
+    Button buttons[][] = new Button[data.getRow()][data.getColumn()];
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
@@ -47,7 +50,7 @@ public class GameScreen extends AppCompatActivity {
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
 
-        for (int row = 0; row < NUM_ROWS; row++) {
+        for (int row = 0; row < data.getRow(); row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -55,7 +58,7 @@ public class GameScreen extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < NUM_COLS; col++){
+            for (int col = 0; col < data.getColumn(); col++){
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -85,7 +88,6 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void gridButtonClicked(int col, int row) {
         Toast.makeText(this, "Button clicked: " + col + "," + row,
@@ -108,8 +110,8 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void lockButtonSizes() {
-        for (int row = 0; row < NUM_ROWS; row++) {
-            for (int col = 0; col < NUM_COLS; col++) {
+        for (int row = 0; row < data.getRow(); row++) {
+            for (int col = 0; col < data.getColumn(); col++) {
                 Button button = buttons[row][col];
 
                 int width = button.getWidth();
@@ -123,14 +125,30 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
-    //use classes
+    //takes in info from model classes
     private void gameData(){
+        data = Options.getInstance();
+        data.setRow(getRow(this));
+        data.setColumn(getColumn(this));
+        data.setNumberOfStars(getNumberOfStars(this));
+
+        ROWS = data.getRow();
+        COLS = data.getColumn();
+        STARS = data.getNumberOfStars();
+
+        manager = CellManager.getInstance();
+        manager.generateStarsRandomly();
+        buttons = new Button[getRow(this)][getColumn(this)];
 
     }
 
-    
-    // get score and save it, get scans used
+    // get user score and save it, get number of scans used
     private void getScore(){
+
+
+    }
+
+    private void updateScansUsedText(){
 
     }
 

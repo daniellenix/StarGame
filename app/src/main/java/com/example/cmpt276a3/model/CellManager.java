@@ -8,6 +8,7 @@ public class CellManager {
     private Cell[][] grid;
     private int[][] starGrid;
     private boolean[][] exploredCell;
+    private int score;
 
     private int[] starInRow;
     private int[] starInColumn;
@@ -49,7 +50,7 @@ public class CellManager {
     }
 
     // generating the stars randomly across grid
-    private void generateStarsRandomly(){
+    public void generateStarsRandomly(){
         int row = data.getRow();
         int column = data.getColumn();
 
@@ -77,10 +78,10 @@ public class CellManager {
     }
 
     // when change options-- generate the stars again randomly (may not need this actually)
-    public void updateCells(){
+ /*   public void updateCells(){
         generateStarsRandomly();
     }
-
+*/
     // checks if have clicked on that cell before
     private boolean isExploredCell(int row, int column){
         return exploredCell[row][column];
@@ -95,8 +96,8 @@ public class CellManager {
         }
     }
 
-
     public int getStars(int row, int column){
         return starGrid[row][column];
     }
+
 }
