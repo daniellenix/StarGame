@@ -23,12 +23,8 @@ import com.example.cmpt276a3.model.Options;
 
 public class GameScreen extends AppCompatActivity {
 
-//    private static final int NUM_ROWS = 7;
-//    private static final int NUM_COLS = 10;
-
     private CellManager cellManager = CellManager.getInstance();
     private Options options = Options.getInstance();
-
 
     Button buttons[][] = new Button[options.getRow()][options.getColumn()];
 
@@ -43,7 +39,6 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.activity_game_screen);
 
         populateButtons();
-
     }
 
     private void populateButtons() {

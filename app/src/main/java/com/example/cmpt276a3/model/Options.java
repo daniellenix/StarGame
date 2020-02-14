@@ -9,9 +9,14 @@ public class Options {
 
     public static Options getInstance() {
         if(instance == null) {
-            instance = new Options();
+            instance = new Options(5, 6);
         }
         return instance;
+    }
+
+    public Options(int row, int column) {
+        this.row = row;
+        this.column = column;
     }
 
     public int getRow() {
