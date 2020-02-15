@@ -4,13 +4,20 @@ public class Options {
     private int row;
     private int column;
     private int numberOfStars;
+
     private static Options instance;
 
     public static Options getInstance() {
         if(instance == null) {
-            instance = new Options();
+            instance = new Options(4, 6, 6);
         }
         return instance;
+    }
+
+    public Options(int row, int column, int numberOfStars) {
+        this.row = row;
+        this.column = column;
+        this.numberOfStars = numberOfStars;
     }
 
     public int getRow() {

@@ -12,7 +12,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.cmpt276a3.model.CellManager;
+import com.example.cmpt276a3.model.Options;
+
 public class OptionsScreen extends AppCompatActivity {
+
+    private CellManager cellManager = CellManager.getInstance();
+    private Options options = Options.getInstance();
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, OptionsScreen.class);
@@ -67,6 +73,17 @@ public class OptionsScreen extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("Board size", size);
         editor.apply();
+
+        if(size.equals("4x6")) {
+            options.setRow(4);
+            options.setColumn(6);
+        } else if(size.equals("5x10")) {
+            options.setRow(5);
+            options.setColumn(10);
+        } else if(size.equals("6x15")) {
+            options.setRow(6);
+            options.setColumn(15);
+        }
     }
 
     static public String getBoardSize(Context context) {
@@ -108,6 +125,16 @@ public class OptionsScreen extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("Number of Stars", numStar);
         editor.apply();
+
+        if(numStar == 6) {
+            options.setNumberOfStars(6);
+        } else if(numStar == 10) {
+            options.setNumberOfStars(10);
+        } else if(numStar == 15) {
+            options.setNumberOfStars(15);
+        } else if(numStar == 20) {
+            options.setNumberOfStars(20);
+        }
     }
 
     static public int getNumberOfStars(Context context) {
