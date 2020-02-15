@@ -29,18 +29,17 @@ import com.example.cmpt276a3.model.Options;
 
 public class GameScreen extends AppCompatActivity {
 
-
     private CellManager cellManager = CellManager.getInstance();
     private Options options = Options.getInstance();
 
     Button buttons[][] = new Button[options.getRow()][options.getColumn()];
 
 
-    private int FOUND = 0;
-    private int SCANS_USED = 0;
-    private int USER_PLAYED = 0;
+    private int foundAllStars = 0;
+    private int scans_Used = 0;
+    private int user_Played = 0;
     private int ROWS;
-    private int COLS;
+    private int COLUMNS;
     private int STARS;
 
     public static Intent makeIntent(Context context) {
@@ -160,7 +159,7 @@ public class GameScreen extends AppCompatActivity {
 
     private void getGameLogic(){
         ROWS = options.getRow();
-        COLS = options.getColumn();
+        COLUMNS = options.getColumn();
         STARS = options.getNumberOfStars();
 
         cellManager = CellManager.getInstance();
@@ -169,26 +168,28 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void callAlertMessage(){
-        if (FOUND == STARS){
+        if (foundAllStars == STARS){
             FragmentManager manager = getSupportFragmentManager();
             AlertScreen dialog = new AlertScreen();
             //dialog.show(manager,getString(R.string.));
         }
     }
 
-    private void saveHighscore(){
-        if(USER_PLAYED == 1){
-            SharedPreferences prefs = this.getSharedPreferences(getString(R.string.),MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
+    //figured out how to do the shared preferences
+    private void saveScore(){
+        if(user_Played == 1){
+
+            //SharedPreferences prefs = this.getSharedPreferences(getString(R.string.),MODE_PRIVATE);
+            //SharedPreferences.Editor editor = prefs.edit();
 
             String rowSize = Integer.toString(ROWS);
-            String colSize = Integer.toString(COLS);
+            String colSize = Integer.toString(COLUMNS);
             String numberOfStars = Integer.toString(STARS);
 
-            String dimensions = rowSize + "x" + colSize + "@" + numberOfStars;
+            String dimensions = rowSize + colSize + numberOfStars;
 
-            editor.putInt(dimensions,SCANS_USED);
-            editor.apply();
+            //editor.putInt(dimensions,scans_Used);
+            //editor.apply();
         }
     }
 }
