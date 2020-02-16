@@ -13,8 +13,6 @@ public class CellManager {
 
     private static Random randomGenerator = new Random();
 
-    private int numberOfStarsFound;
-
     private static CellManager instance;
     private Options options = Options.getInstance();
 
@@ -40,7 +38,6 @@ public class CellManager {
     // generating the stars randomly across grid
     public void generateStarsRandomly(){
 
-        numberOfStarsFound = 0;
         grid = new Cell[options.getRow()][options.getColumn()];
         int totalNumberOfStars = options.getNumberOfStars();
 
@@ -64,25 +61,37 @@ public class CellManager {
         }
     }
 
-    public boolean checkIfStar(int row, int col) {
+    public boolean hasStar(int row, int col) {
         return grid[row][col] == STAR_NOT_CLICKED;
     }
 
 
-    // checks if have clicked on that cell before
-    private boolean isExploredCell(int row, int col){
-        return grid[row][col] == STAR_CLICKED || grid[row][col] == NO_STAR_CLICKED;
+    // checks if should do a scan
+    public boolean doScan(int row, int col){
+        return grid[row][col] == NO_STAR_NOT_CLICKED || grid[row][col] == STAR_CLICKED;
     }
 
-    // decrement total number of stars when user finds one
-    public void updateNumberOfHiddenStarsOnceFound(int row, int column){
-        for (int i = 0; i < options.getRow(); i++) {
-            for (int j = 0; j < options.getColumn(); j++) {
-                if(grid[i][j] == STAR_CLICKED) {
-                    numberOfStarsFound--;
-                }
+    public void markStarClicked(int row, int col) {
+        grid[row][col] = STAR_CLICKED;
+
+    }
+
+    public int scanRowAndCol(int row, int col) {
+        int starCounter = 0;
+
+        for (int i = 0; i < row; i++) {
+            if(grid[i][col] == STAR_NOT_CLICKED) {
+                starCounter++;
             }
         }
+
+        for (int i = 0; i < col; i++) {
+            if(grid[row][i] == STAR_NOT_CLICKED) {
+                starCounter++;
+            }
+        }
+
+        return starCounter;
     }
 
 

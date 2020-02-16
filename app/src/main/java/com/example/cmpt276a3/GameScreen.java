@@ -14,7 +14,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.FileObserver;
 import android.os.Message;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -35,12 +37,9 @@ public class GameScreen extends AppCompatActivity {
     Button buttons[][] = new Button[options.getRow()][options.getColumn()];
 
 
-    private int foundAllStars = 0;
-    private int scans_Used = 0;
-    private int user_Played = 0;
-    private int ROWS;
-    private int COLUMNS;
-    private int STARS;
+    private int foundStars;
+    private int scansUsed;
+    private int userPlayed;
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
@@ -60,12 +59,10 @@ public class GameScreen extends AppCompatActivity {
     private void refreshScreen() {
         TextView starsFound = findViewById(R.id.foundStars);
         int numStars = OptionsScreen.getNumberOfStars(this);
-        starsFound.setText("Found 0 of " + numStars);
+        starsFound.setText("Found " + foundStars + " of " + numStars);
 
-        // TODO: set scans used and times played
         TextView numOfScans = findViewById(R.id.scansUsed);
-//        int numStars = OptionsScreen.getNumberOfStars(this);
-//        starsFound.setText("Found 0 of " + numStars);
+        numOfScans.setText("# of scans used: " + scansUsed);
 
         TextView timesPlayed = findViewById(R.id.timesPlayed);
 //        int numStars = OptionsScreen.getNumberOfStars(this);
@@ -95,8 +92,6 @@ public class GameScreen extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                // text on buttons before pressed
-                button.setText("" + col + "," + row);
 
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
@@ -106,9 +101,21 @@ public class GameScreen extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if(cellManager.checkIfStar(FINAL_ROW, FINAL_COL)) {
-                            gridButtonClicked(FINAL_COL, FINAL_ROW);
+                        // if cell has star
+                        if(cellManager.hasStar(FINAL_ROW, FINAL_COL)) {
+                            gridButtonClicked(FINAL_ROW, FINAL_COL);
+                            foundStars++;
+                            refreshScreen();
+                            cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
+
+                            // FIX
+                            // Performs a scan if either no mine is present, or the mine has already been revealed
+                        } else if(cellManager.doScan(FINAL_ROW, FINAL_COL)) {
+                            gridButtonClickedStar(FINAL_ROW, FINAL_COL);
+                            scansUsed++;
+                            refreshScreen();
                         }
+
                     }
                 });
 
@@ -119,9 +126,8 @@ public class GameScreen extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void gridButtonClicked(int col, int row) {
-        Toast.makeText(this, "Button clicked: " + col + "," + row,
-                Toast.LENGTH_SHORT).show();
+    private void gridButtonClicked(int row, int col) {
+
         Button button = buttons[row][col];
 
         // Lock Button Sizes:
@@ -134,11 +140,21 @@ public class GameScreen extends AppCompatActivity {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void gridButtonClickedStar(int row, int col) {
+        Button button = buttons[row][col];
+
+        // Lock Button Sizes:
+        lockButtonSizes();
+
+        int scan = cellManager.scanRowAndCol(row, col);
 
         // text on buttons once pressed
-        button.setText("" + col);
-
+        button.setText("" + scan);
     }
+
 
     private void lockButtonSizes() {
         for (int row = 0; row < options.getRow(); row++) {
@@ -163,18 +179,8 @@ public class GameScreen extends AppCompatActivity {
         return true;
     }
 
-    private void getGameLogic(){
-        ROWS = options.getRow();
-        COLUMNS = options.getColumn();
-        STARS = options.getNumberOfStars();
-
-        cellManager = CellManager.getInstance();
-        cellManager.updateCells();
-        buttons = new Button[options.getRow()][options.getColumn()];
-    }
-
     private void callAlertMessage(){
-        if (foundAllStars == STARS){
+        if (foundStars == options.getNumberOfStars()){
             FragmentManager manager = getSupportFragmentManager();
             AlertScreen dialog = new AlertScreen();
             //dialog.show(manager,getString(R.string.));
@@ -183,14 +189,14 @@ public class GameScreen extends AppCompatActivity {
 
     //figured out how to do the shared preferences
     private void saveScore(){
-        if(user_Played == 1){
+        if(userPlayed == 1){
 
             //SharedPreferences prefs = this.getSharedPreferences(getString(R.string.),MODE_PRIVATE);
             //SharedPreferences.Editor editor = prefs.edit();
 
-            String rowSize = Integer.toString(ROWS);
-            String colSize = Integer.toString(COLUMNS);
-            String numberOfStars = Integer.toString(STARS);
+            String rowSize = Integer.toString(options.getRow());
+            String colSize = Integer.toString(options.getColumn());
+            String numberOfStars = Integer.toString(options.getNumberOfStars());
 
             String dimensions = rowSize + colSize + numberOfStars;
 
