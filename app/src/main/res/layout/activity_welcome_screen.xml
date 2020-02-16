@@ -92,4 +92,13 @@
         app:layout_constraintTop_toBottomOf="@+id/welcome_Title"
         app:layout_constraintVertical_bias="0.363" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="270dp"
+        android:layout_height="247dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_Title"
+        app:srcCompat="@drawable/bitmoji" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

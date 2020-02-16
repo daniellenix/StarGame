@@ -54,6 +54,7 @@ public class GameScreen extends AppCompatActivity {
 
         populateButtons();
         refreshScreen();
+
     }
 
     private void refreshScreen() {
@@ -73,6 +74,7 @@ public class GameScreen extends AppCompatActivity {
 
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
+        cellManager.generateStarsRandomly();
 
         for (int row = 0; row < options.getRow(); row++) {
             TableRow tableRow = new TableRow(this);
@@ -86,6 +88,7 @@ public class GameScreen extends AppCompatActivity {
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
+                // adds buttons to each row and col
                 Button button = new Button(this);
                 button.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
@@ -102,7 +105,10 @@ public class GameScreen extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onClick(View v) {
-                        gridButtonClicked(FINAL_COL, FINAL_ROW);
+
+                        if(cellManager.checkIfStar(FINAL_ROW, FINAL_COL)) {
+                            gridButtonClicked(FINAL_COL, FINAL_ROW);
+                        }
                     }
                 });
 
