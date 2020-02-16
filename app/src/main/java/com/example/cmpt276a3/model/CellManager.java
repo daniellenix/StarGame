@@ -41,10 +41,10 @@ public class CellManager {
     public void generateStarsRandomly(){
 
         numberOfStarsFound = 0;
-
         grid = new Cell[options.getRow()][options.getColumn()];
         int totalNumberOfStars = options.getNumberOfStars();
 
+        // initialize the board to all empty cells, that have not been explored
         for (int i = 0; i < options.getRow(); i++) {
             for (int j = 0; j < options.getColumn() ; j++) {
                 grid[i][j] = NO_STAR_NOT_CLICKED;
@@ -53,6 +53,7 @@ public class CellManager {
 
         int starsPlaced = 0;
 
+        // randomly puts stars on board
         while (starsPlaced < totalNumberOfStars) {
             int row = randomGenerator.nextInt(grid.length);
             int col = randomGenerator.nextInt(grid[row].length);
@@ -67,11 +68,6 @@ public class CellManager {
         return grid[row][col] == STAR_NOT_CLICKED;
     }
 
-
-    // when change options-- generate the stars again randomly (may not need this actually)
-    public void updateCells(){
-        generateStarsRandomly();
-    }
 
     // checks if have clicked on that cell before
     private boolean isExploredCell(int row, int col){
@@ -88,5 +84,7 @@ public class CellManager {
             }
         }
     }
+
+
 
 }
