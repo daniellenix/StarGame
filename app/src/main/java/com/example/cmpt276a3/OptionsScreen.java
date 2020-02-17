@@ -39,7 +39,6 @@ public class OptionsScreen extends AppCompatActivity {
 
         String savedBoardValue = getBoardSize(this);
         Toast.makeText(this, "Saved value: "+ savedBoardValue, Toast.LENGTH_SHORT).show();
-
     }
 
     private void boardSize() {

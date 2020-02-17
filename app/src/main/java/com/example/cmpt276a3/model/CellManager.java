@@ -29,8 +29,6 @@ public class CellManager {
     }
 
     //getters
-
-
     public Cell[][] getGrid() {
         return grid;
     }
@@ -74,7 +72,7 @@ public class CellManager {
     }
 
     public boolean noStarAndClicked(int row, int col) {
-        return grid[row][col] == NO_STAR_NOT_CLICKED;
+        return grid[row][col] == NO_STAR_CLICKED;
     }
 
     public void markStarClicked(int row, int col) {
@@ -90,21 +88,17 @@ public class CellManager {
     public int scanRowAndCol(int row, int col) {
         int starCounter = 0;
 
-        for (int i = 0; i < row; i++) {
-            if(grid[i][col] == STAR_NOT_CLICKED) {
+        for (int i = 0; i < options.getRow(); i++) {
+            if(grid[i][col] == STAR_NOT_CLICKED || grid[i][col] == STAR_CLICKED) {
                 starCounter++;
             }
         }
 
-        for (int i = 0; i < col; i++) {
-            if(grid[row][i] == STAR_NOT_CLICKED) {
+        for (int i = 0; i < options.getColumn(); i++) {
+            if(grid[row][i] == STAR_NOT_CLICKED || grid[row][i] == STAR_CLICKED) {
                 starCounter++;
             }
         }
-
         return starCounter;
     }
-
-
-
 }

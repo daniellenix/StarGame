@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cmpt276a3.model.CellManager;
+
 import org.w3c.dom.Text;
 
 public class WelcomeScreen extends AppCompatActivity{
@@ -17,6 +19,7 @@ public class WelcomeScreen extends AppCompatActivity{
     ImageView star_circle;
     TextView bounceTextView;
     TextView fadeInTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

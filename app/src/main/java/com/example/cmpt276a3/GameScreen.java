@@ -34,8 +34,7 @@ public class GameScreen extends AppCompatActivity {
     private CellManager cellManager = CellManager.getInstance();
     private Options options = Options.getInstance();
 
-    Button buttons[][] = new Button[options.getRow()][options.getColumn()];
-
+    Button buttons[][];
 
     private int foundStars;
     private int scansUsed;
@@ -51,14 +50,8 @@ public class GameScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
+        buttons = new Button[options.getRow()][options.getColumn()];
         populateButtons();
-        refreshScreen();
-
-        // not working?
-        if(foundStars == options.getNumberOfStars()) {
-            callAlertMessage();
-        }
-
     }
 
     private void refreshScreen() {
@@ -70,8 +63,6 @@ public class GameScreen extends AppCompatActivity {
         numOfScans.setText("# of scans used: " + scansUsed);
 
         TextView timesPlayed = findViewById(R.id.timesPlayed);
-//        int numStars = OptionsScreen.getNumberOfStars(this);
-//        starsFound.setText("Found 0 of " + numStars);
     }
 
     private void populateButtons() {
@@ -110,23 +101,25 @@ public class GameScreen extends AppCompatActivity {
                         if(cellManager.hasStarNotClicked(FINAL_ROW, FINAL_COL)) {
                             showStar(FINAL_ROW, FINAL_COL);
                             foundStars++;
-                            refreshScreen();
-                            cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
-
-                            // Performs a scan if no mine is present
-                        } else if(cellManager.noStarNotClicked(FINAL_ROW, FINAL_COL)) {
-                            scan(FINAL_ROW, FINAL_COL);
-                            scansUsed++;
-                            refreshScreen();
-                            cellManager.markNoStarClicked(FINAL_ROW, FINAL_COL);
-
-                            // Performs a scan if mine has already been revealed
-                        } else if(cellManager.hasStarAndClicked(FINAL_ROW, FINAL_COL)) {
-                            scan(FINAL_ROW, FINAL_COL);
-                            scansUsed++;
-                            refreshScreen();
                             cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
                         }
+
+                        // Performs a scan if no mine is present
+                        else if(cellManager.noStarNotClicked(FINAL_ROW, FINAL_COL)) {
+                            cellManager.markNoStarClicked(FINAL_ROW, FINAL_COL);
+                            scan(FINAL_ROW, FINAL_COL);
+                            scansUsed++;
+                        }
+
+                        // Performs a scan if mine has already been revealed
+                        else if(cellManager.hasStarAndClicked(FINAL_ROW, FINAL_COL)) {
+                            cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
+                            scanMinusOne(FINAL_ROW, FINAL_COL);
+                            scansUsed++;
+                        }
+
+                        refreshScreen();
+//                        callAlertMessage();
                     }
                 });
 
@@ -135,6 +128,7 @@ public class GameScreen extends AppCompatActivity {
             }
         }
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void showStar(int row, int col) {
@@ -159,13 +153,23 @@ public class GameScreen extends AppCompatActivity {
 
         // Lock Button Sizes:
         lockButtonSizes();
-
         int scan = cellManager.scanRowAndCol(row, col);
 
         // text on buttons once pressed
         button.setText("" + scan);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void scanMinusOne(int row, int col) {
+        Button button = buttons[row][col];
+
+        // Lock Button Sizes:
+        lockButtonSizes();
+        int scan = cellManager.scanRowAndCol(row, col) - 1;
+
+        // text on buttons once pressed
+        button.setText("" + scan);
+    }
 
     private void lockButtonSizes() {
         for (int row = 0; row < options.getRow(); row++) {
