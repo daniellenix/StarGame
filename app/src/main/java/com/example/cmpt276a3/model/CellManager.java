@@ -61,18 +61,29 @@ public class CellManager {
         }
     }
 
-    public boolean hasStar(int row, int col) {
+    public boolean hasStarNotClicked(int row, int col) {
         return grid[row][col] == STAR_NOT_CLICKED;
     }
 
+    public boolean hasStarAndClicked(int row, int col) {
+        return grid[row][col] == STAR_CLICKED;
+    }
 
-    // checks if should do a scan
-    public boolean doScan(int row, int col){
-        return grid[row][col] == NO_STAR_NOT_CLICKED || grid[row][col] == STAR_CLICKED;
+    public boolean noStarNotClicked(int row, int col) {
+        return grid[row][col] == NO_STAR_NOT_CLICKED;
+    }
+
+    public boolean noStarAndClicked(int row, int col) {
+        return grid[row][col] == NO_STAR_NOT_CLICKED;
     }
 
     public void markStarClicked(int row, int col) {
         grid[row][col] = STAR_CLICKED;
+
+    }
+
+    public void markNoStarClicked(int row, int col) {
+        grid[row][col] = NO_STAR_CLICKED;
 
     }
 

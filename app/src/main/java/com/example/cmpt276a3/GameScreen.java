@@ -54,6 +54,11 @@ public class GameScreen extends AppCompatActivity {
         populateButtons();
         refreshScreen();
 
+        // not working?
+        if(foundStars == options.getNumberOfStars()) {
+            callAlertMessage();
+        }
+
     }
 
     private void refreshScreen() {
@@ -102,20 +107,26 @@ public class GameScreen extends AppCompatActivity {
                     public void onClick(View v) {
 
                         // if cell has star
-                        if(cellManager.hasStar(FINAL_ROW, FINAL_COL)) {
-                            gridButtonClicked(FINAL_ROW, FINAL_COL);
+                        if(cellManager.hasStarNotClicked(FINAL_ROW, FINAL_COL)) {
+                            showStar(FINAL_ROW, FINAL_COL);
                             foundStars++;
                             refreshScreen();
                             cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
 
-                            // FIX
-                            // Performs a scan if either no mine is present, or the mine has already been revealed
-                        } else if(cellManager.doScan(FINAL_ROW, FINAL_COL)) {
-                            gridButtonClickedStar(FINAL_ROW, FINAL_COL);
+                            // Performs a scan if no mine is present
+                        } else if(cellManager.noStarNotClicked(FINAL_ROW, FINAL_COL)) {
+                            scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
                             refreshScreen();
-                        }
+                            cellManager.markNoStarClicked(FINAL_ROW, FINAL_COL);
 
+                            // Performs a scan if mine has already been revealed
+                        } else if(cellManager.hasStarAndClicked(FINAL_ROW, FINAL_COL)) {
+                            scan(FINAL_ROW, FINAL_COL);
+                            scansUsed++;
+                            refreshScreen();
+                            cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
+                        }
                     }
                 });
 
@@ -126,7 +137,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void gridButtonClicked(int row, int col) {
+    private void showStar(int row, int col) {
 
         Button button = buttons[row][col];
 
@@ -143,7 +154,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void gridButtonClickedStar(int row, int col) {
+    private void scan(int row, int col) {
         Button button = buttons[row][col];
 
         // Lock Button Sizes:
@@ -183,7 +194,8 @@ public class GameScreen extends AppCompatActivity {
         if (foundStars == options.getNumberOfStars()){
             FragmentManager manager = getSupportFragmentManager();
             AlertScreen dialog = new AlertScreen();
-            //dialog.show(manager,getString(R.string.));
+            dialog.show(manager, "Message Dialog");
+            Log.i("TAG", "Just showed the dialog");
         }
     }
 
