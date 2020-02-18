@@ -54,7 +54,6 @@ public class GameScreen extends AppCompatActivity {
 
         buttons = new Button[options.getRow()][options.getColumn()];
         populateButtons();
-//        callAlertMessage();
     }
 
     private void refreshScreen() {
@@ -98,7 +97,8 @@ public class GameScreen extends AppCompatActivity {
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
 
-                final MediaPlayer mp = MediaPlayer.create(this, R.raw.sonar);
+                final MediaPlayer mp1 = MediaPlayer.create(this, R.raw.sonar);
+                final MediaPlayer mp2 = MediaPlayer.create(this, R.raw.twinkle);
 
                 button.setOnClickListener(new View.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -110,6 +110,7 @@ public class GameScreen extends AppCompatActivity {
                             showStar(FINAL_ROW, FINAL_COL);
                             foundStars++;
                             cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
+                            mp2.start();
                         }
 
                         // Performs a scan if no mine is present
@@ -117,7 +118,7 @@ public class GameScreen extends AppCompatActivity {
                             cellManager.markNoStarClicked(FINAL_ROW, FINAL_COL);
                             scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
-                            mp.start();
+                            mp1.start();
                         }
 
                         // Performs a scan if mine has already been revealed
@@ -125,7 +126,7 @@ public class GameScreen extends AppCompatActivity {
                             cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
                             scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
-                            mp.start();
+                            mp1.start();
                         }
 
                         refreshScreen();
