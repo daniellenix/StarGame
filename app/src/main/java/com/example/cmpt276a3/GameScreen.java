@@ -53,7 +53,9 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.activity_game_screen);
 
         buttons = new Button[options.getRow()][options.getColumn()];
+
         populateButtons();
+        refreshScreen();
     }
 
     private void refreshScreen() {
@@ -123,10 +125,22 @@ public class GameScreen extends AppCompatActivity {
 
                         // Performs a scan if mine has already been revealed
                         else if(cellManager.hasStarAndClicked(FINAL_ROW, FINAL_COL)) {
-                            cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
+                            cellManager.markStarScanned(FINAL_ROW, FINAL_COL);
                             scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
                             mp1.start();
+                        }
+
+                        for (int i = 0; i < options.getRow(); i++) {
+                            if(cellManager.noStarAndClicked(i, FINAL_COL) || cellManager.hasStarScanned(i, FINAL_COL)) {
+                                scan(i, FINAL_COL);
+                            }
+                        }
+
+                        for(int j = 0; j < options.getColumn(); j++) {
+                            if(cellManager.noStarAndClicked(FINAL_ROW, j) || cellManager.hasStarScanned(FINAL_ROW, j)) {
+                                scan(FINAL_ROW, j);
+                            }
                         }
 
                         refreshScreen();

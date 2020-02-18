@@ -6,10 +6,11 @@ public class CellManager {
 
     private Cell[][] grid;
 
-    private static final Cell STAR_NOT_CLICKED = new Cell(true, false);
-    private static final Cell NO_STAR_NOT_CLICKED = new Cell(false, false);
-    private static final Cell STAR_CLICKED = new Cell(true, true);
-    private static final Cell NO_STAR_CLICKED = new Cell(false, true);
+    private static final Cell STAR_NOT_CLICKED = new Cell(true, false, false);
+    private static final Cell NO_STAR_NOT_CLICKED = new Cell(false, false, false);
+    private static final Cell STAR_CLICKED = new Cell(true, true, false);
+    private static final Cell NO_STAR_CLICKED = new Cell(false, true, false);
+    private static final Cell STAR_SCANNED = new Cell(true, true, true);
 
     private static Random randomGenerator = new Random();
 
@@ -59,6 +60,10 @@ public class CellManager {
         }
     }
 
+    public boolean hasStarScanned(int row, int col) {
+        return grid[row][col] == STAR_SCANNED;
+    }
+
     public boolean hasStarNotClicked(int row, int col) {
         return grid[row][col] == STAR_NOT_CLICKED;
     }
@@ -102,4 +107,7 @@ public class CellManager {
         return starCounter;
     }
 
+    public void markStarScanned(int row, int col) {
+        grid[row][col] = STAR_SCANNED;
+    }
 }
