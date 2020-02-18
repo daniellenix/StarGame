@@ -27,12 +27,11 @@
         android:id="@+id/imageView"
         android:layout_width="221dp"
         android:layout_height="154dp"
-        android:layout_marginStart="228dp"
-        android:layout_marginLeft="228dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="76dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/congrats_text"
+        app:layout_constraintStart_toStartOf="@+id/congrats_text"
         app:layout_constraintTop_toBottomOf="@+id/congrats_text"
         app:srcCompat="@drawable/star" />
 

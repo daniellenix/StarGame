@@ -85,23 +85,6 @@ public class CellManager {
 
     }
 
-//    public int scanRowAndCol(int row, int col) {
-//        int starCounter = 0;
-//
-//        for (int i = 0; i < options.getRow(); i++) {
-//            if(grid[i][col] == STAR_NOT_CLICKED || grid[i][col] == STAR_CLICKED) {
-//                starCounter++;
-//            }
-//        }
-//
-//        for (int i = 0; i < options.getColumn(); i++) {
-//            if(grid[row][i] == STAR_NOT_CLICKED || grid[row][i] == STAR_CLICKED) {
-//                starCounter++;
-//            }
-//        }
-//        return starCounter;
-//    }
-
     public int scanRowAndCol(int row, int col) {
         int starCounter = 0;
 

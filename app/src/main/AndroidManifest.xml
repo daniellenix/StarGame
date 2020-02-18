@@ -12,11 +12,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".GameScreen"
-            android:label="Game Screen"
+            android:label="Game"
             android:screenOrientation="landscape" ></activity>
         <activity
             android:name=".OptionsScreen"
-            android:label="Options Screen"
+            android:label="Options"
             android:screenOrientation="landscape" />
         <activity
             android:name=".MainMenu"
@@ -28,7 +28,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".WelcomeScreen"
-            android:label="Main Menu"
+            android:label="Welcome"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
