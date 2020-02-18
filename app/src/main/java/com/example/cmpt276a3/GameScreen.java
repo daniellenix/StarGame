@@ -1,18 +1,28 @@
 package com.example.cmpt276a3;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.FileObserver;
+import android.os.Message;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -27,17 +37,24 @@ public class GameScreen extends AppCompatActivity {
     private CellManager cellManager = CellManager.getInstance();
     private Options options = Options.getInstance();
 
-    Button buttons[][] = new Button[options.getRow()][options.getColumn()];
+    Button buttons[][];
+
+    private int foundStars;
+    private int scansUsed;
+    private int userPlayed;
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
         return intent;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
+
+        buttons = new Button[options.getRow()][options.getColumn()];
 
         populateButtons();
         refreshScreen();
@@ -46,20 +63,20 @@ public class GameScreen extends AppCompatActivity {
     private void refreshScreen() {
         TextView starsFound = findViewById(R.id.foundStars);
         int numStars = OptionsScreen.getNumberOfStars(this);
-        starsFound.setText("Found 0 of " + numStars);
+        starsFound.setText("Found " + foundStars + " of " + numStars);
 
-        // TODO: set scans used and times played
         TextView numOfScans = findViewById(R.id.scansUsed);
-//        int numStars = OptionsScreen.getNumberOfStars(this);
-//        starsFound.setText("Found 0 of " + numStars);
+        numOfScans.setText("# of scans used: " + scansUsed);
 
         TextView timesPlayed = findViewById(R.id.timesPlayed);
-//        int numStars = OptionsScreen.getNumberOfStars(this);
-//        starsFound.setText("Found 0 of " + numStars);
     }
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
+        cellManager.generateStarsRandomly();
 
         for (int row = 0; row < options.getRow(); row++) {
             TableRow tableRow = new TableRow(this);
@@ -73,23 +90,95 @@ public class GameScreen extends AppCompatActivity {
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
-                Button button = new Button(this);
+                // adds buttons to each row and col
+                final Button button = new Button(this);
                 button.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                // text on buttons before pressed
-                button.setText("" + col + "," + row);
 
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
+
+                final MediaPlayer mp1 = MediaPlayer.create(this, R.raw.sonar);
+                final MediaPlayer mp2 = MediaPlayer.create(this, R.raw.twinkle);
 
                 button.setOnClickListener(new View.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onClick(View v) {
-                        gridButtonClicked(FINAL_COL, FINAL_ROW);
+
+                        // if cell has star
+                        if(cellManager.hasStarNotClicked(FINAL_ROW, FINAL_COL)) {
+                            showStar(FINAL_ROW, FINAL_COL);
+                            foundStars++;
+                            cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
+                            mp2.start();
+                        }
+
+                        // Performs a scan if no mine is present
+                        else if(cellManager.noStarNotClicked(FINAL_ROW, FINAL_COL)) {
+                            cellManager.markNoStarClicked(FINAL_ROW, FINAL_COL);
+                            scan(FINAL_ROW, FINAL_COL);
+                            scansUsed++;
+                            mp1.start();
+
+                            for (int i = 0; i < options.getRow(); i++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[i][FINAL_COL].startAnimation(anim);
+                            }
+
+                            for(int j = 0; j < options.getColumn(); j++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[FINAL_ROW][j].startAnimation(anim);
+                            }
+                        }
+
+                        // Performs a scan if mine has already been revealed
+                        else if(cellManager.hasStarAndClicked(FINAL_ROW, FINAL_COL)) {
+                            cellManager.markStarScanned(FINAL_ROW, FINAL_COL);
+                            scan(FINAL_ROW, FINAL_COL);
+                            scansUsed++;
+                            mp1.start();
+
+                            for (int i = 0; i < options.getRow(); i++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[i][FINAL_COL].startAnimation(anim);
+                            }
+
+                            for(int j = 0; j < options.getColumn(); j++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[FINAL_ROW][j].startAnimation(anim);
+                            }
+                        }
+
+                        for (int i = 0; i < options.getRow(); i++) {
+                            if(cellManager.noStarAndClicked(i, FINAL_COL) || cellManager.hasStarScanned(i, FINAL_COL)) {
+                                scan(i, FINAL_COL);
+                            }
+                        }
+
+                        for(int j = 0; j < options.getColumn(); j++) {
+                            if(cellManager.noStarAndClicked(FINAL_ROW, j) || cellManager.hasStarScanned(FINAL_ROW, j)) {
+                                scan(FINAL_ROW, j);
+                            }
+                        }
+
+                        refreshScreen();
+                        callAlertMessage();
                     }
                 });
 
@@ -99,10 +188,10 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void gridButtonClicked(int col, int row) {
-        Toast.makeText(this, "Button clicked: " + col + "," + row,
-                Toast.LENGTH_SHORT).show();
+    private void showStar(int row, int col) {
+
         Button button = buttons[row][col];
 
         // Lock Button Sizes:
@@ -115,10 +204,30 @@ public class GameScreen extends AppCompatActivity {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void scan(int row, int col) {
+        Button button = buttons[row][col];
+
+        // Lock Button Sizes:
+        lockButtonSizes();
+        int scan = cellManager.scanRowAndCol(row, col);
 
         // text on buttons once pressed
-        button.setText("" + col);
+        button.setText("" + scan);
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void scanMinusOne(int row, int col) {
+        Button button = buttons[row][col];
+
+        // Lock Button Sizes:
+        lockButtonSizes();
+        int scan = cellManager.scanRowAndCol(row, col) - 1;
+
+        // text on buttons once pressed
+        button.setText("" + scan);
     }
 
     private void lockButtonSizes() {
@@ -137,11 +246,37 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    private void callAlertMessage(){
+        if (foundStars == options.getNumberOfStars()){
+            FragmentManager manager = getSupportFragmentManager();
+            AlertScreen dialog = new AlertScreen();
+            dialog.show(manager, "Message Dialog");
+            Log.i("TAG", "Just showed the dialog");
+        }
+    }
+
+    //figured out how to do the shared preferences
+    private void saveScore(){
+        if(userPlayed == 1){
+
+            //SharedPreferences prefs = this.getSharedPreferences(getString(R.string.),MODE_PRIVATE);
+            //SharedPreferences.Editor editor = prefs.edit();
+
+            String rowSize = Integer.toString(options.getRow());
+            String colSize = Integer.toString(options.getColumn());
+            String numberOfStars = Integer.toString(options.getNumberOfStars());
+
+            String dimensions = rowSize + colSize + numberOfStars;
+
+            //editor.putInt(dimensions,scans_Used);
+            //editor.apply();
+        }
     }
 }

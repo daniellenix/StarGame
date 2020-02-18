@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.cmpt276a3.model.Options;
+
 public class MainMenu extends AppCompatActivity {
+
+    private Options options = Options.getInstance();
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, MainMenu.class);
@@ -23,6 +27,10 @@ public class MainMenu extends AppCompatActivity {
         playGame();
         options();
         help();
+
+        options.setRow(4);
+        options.setColumn(6);
+        options.setNumberOfStars(6);
     }
 
     private void playGame() {
@@ -58,6 +66,12 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
 }
