@@ -7,17 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.cmpt276a3.model.CellManager;
 import com.example.cmpt276a3.model.Options;
 
 public class OptionsScreen extends AppCompatActivity {
 
-    private CellManager cellManager = CellManager.getInstance();
     private Options options = Options.getInstance();
 
     public static Intent makeIntent(Context context) {
@@ -32,13 +29,6 @@ public class OptionsScreen extends AppCompatActivity {
 
         boardSize();
         numberOfStars();
-        eraseButton();
-
-//        int savedNumberOfStarsValue = getNumberOfStars(this);
-//        Toast.makeText(this, "Saved value: "+ savedNumberOfStarsValue, Toast.LENGTH_SHORT).show();
-//
-//        String savedBoardValue = getBoardSize(this);
-//        Toast.makeText(this, "Saved value: "+ savedBoardValue, Toast.LENGTH_SHORT).show();
     }
 
     private void boardSize() {
@@ -56,7 +46,6 @@ public class OptionsScreen extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(OptionsScreen.this, "You clicked " + size, Toast.LENGTH_SHORT).show();
                     saveBoardSize(size);
                 }
             });
@@ -109,7 +98,6 @@ public class OptionsScreen extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(OptionsScreen.this, "You clicked " + numStar, Toast.LENGTH_SHORT).show();
                     saveNumberOfStars(numStar);
                 }
             });
@@ -142,16 +130,6 @@ public class OptionsScreen extends AppCompatActivity {
         SharedPreferences prefs = context.getSharedPreferences("StarPrefs", MODE_PRIVATE);
         int defaultValue = context.getResources().getInteger(R.integer.default_num_stars);
         return prefs.getInt("Number of Stars", defaultValue);
-    }
-
-
-    private void eraseButton() {
-        Button btn = findViewById(R.id.eraseTimesPlayed);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
     }
 
 }

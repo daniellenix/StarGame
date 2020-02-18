@@ -41,7 +41,6 @@ public class GameScreen extends AppCompatActivity {
 
     private int foundStars;
     private int scansUsed;
-    private int userPlayed;
 
     public static Intent makeIntent(Context context) {
         Intent intent =  new Intent(context, GameScreen.class);
@@ -67,8 +66,6 @@ public class GameScreen extends AppCompatActivity {
 
         TextView numOfScans = findViewById(R.id.scansUsed);
         numOfScans.setText("# of scans used: " + scansUsed);
-
-        TextView timesPlayed = findViewById(R.id.timesPlayed);
     }
 
 
@@ -259,24 +256,6 @@ public class GameScreen extends AppCompatActivity {
             AlertScreen dialog = new AlertScreen();
             dialog.show(manager, "Message Dialog");
             Log.i("TAG", "Just showed the dialog");
-        }
-    }
-
-    //figured out how to do the shared preferences
-    private void saveScore(){
-        if(userPlayed == 1){
-
-            //SharedPreferences prefs = this.getSharedPreferences(getString(R.string.),MODE_PRIVATE);
-            //SharedPreferences.Editor editor = prefs.edit();
-
-            String rowSize = Integer.toString(options.getRow());
-            String colSize = Integer.toString(options.getColumn());
-            String numberOfStars = Integer.toString(options.getNumberOfStars());
-
-            String dimensions = rowSize + colSize + numberOfStars;
-
-            //editor.putInt(dimensions,scans_Used);
-            //editor.apply();
         }
     }
 }
