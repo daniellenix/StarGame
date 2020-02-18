@@ -21,6 +21,8 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -89,7 +91,7 @@ public class GameScreen extends AppCompatActivity {
                 final int FINAL_ROW = row;
 
                 // adds buttons to each row and col
-                Button button = new Button(this);
+                final Button button = new Button(this);
                 button.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
@@ -121,6 +123,22 @@ public class GameScreen extends AppCompatActivity {
                             scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
                             mp1.start();
+
+                            for (int i = 0; i < options.getRow(); i++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[i][FINAL_COL].startAnimation(anim);
+                            }
+
+                            for(int j = 0; j < options.getColumn(); j++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[FINAL_ROW][j].startAnimation(anim);
+                            }
                         }
 
                         // Performs a scan if mine has already been revealed
@@ -129,6 +147,22 @@ public class GameScreen extends AppCompatActivity {
                             scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
                             mp1.start();
+
+                            for (int i = 0; i < options.getRow(); i++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[i][FINAL_COL].startAnimation(anim);
+                            }
+
+                            for(int j = 0; j < options.getColumn(); j++) {
+                                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                                anim.setDuration(50);
+                                anim.setStartOffset(20);
+                                anim.setRepeatMode(Animation.REVERSE);
+                                buttons[FINAL_ROW][j].startAnimation(anim);
+                            }
                         }
 
                         for (int i = 0; i < options.getRow(); i++) {
