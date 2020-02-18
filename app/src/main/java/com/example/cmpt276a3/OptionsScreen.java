@@ -34,11 +34,11 @@ public class OptionsScreen extends AppCompatActivity {
         numberOfStars();
         eraseButton();
 
-        int savedNumberOfStarsValue = getNumberOfStars(this);
-        Toast.makeText(this, "Saved value: "+ savedNumberOfStarsValue, Toast.LENGTH_SHORT).show();
-
-        String savedBoardValue = getBoardSize(this);
-        Toast.makeText(this, "Saved value: "+ savedBoardValue, Toast.LENGTH_SHORT).show();
+//        int savedNumberOfStarsValue = getNumberOfStars(this);
+//        Toast.makeText(this, "Saved value: "+ savedNumberOfStarsValue, Toast.LENGTH_SHORT).show();
+//
+//        String savedBoardValue = getBoardSize(this);
+//        Toast.makeText(this, "Saved value: "+ savedBoardValue, Toast.LENGTH_SHORT).show();
     }
 
     private void boardSize() {
@@ -56,7 +56,7 @@ public class OptionsScreen extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(OptionsScreen.this, "You clicked " + size, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(OptionsScreen.this, "You clicked " + size, Toast.LENGTH_SHORT).show();
                     saveBoardSize(size);
                 }
             });
@@ -109,7 +109,7 @@ public class OptionsScreen extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(OptionsScreen.this, "You clicked " + numStar, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(OptionsScreen.this, "You clicked " + numStar, Toast.LENGTH_SHORT).show();
                     saveNumberOfStars(numStar);
                 }
             });
