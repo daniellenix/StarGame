@@ -45,6 +45,7 @@ public class GameScreen extends AppCompatActivity {
         return intent;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class GameScreen extends AppCompatActivity {
 
         buttons = new Button[options.getRow()][options.getColumn()];
         populateButtons();
+        callAlertMessage();
     }
 
     private void refreshScreen() {
@@ -65,6 +67,7 @@ public class GameScreen extends AppCompatActivity {
         TextView timesPlayed = findViewById(R.id.timesPlayed);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
         cellManager.generateStarsRandomly();
@@ -114,7 +117,7 @@ public class GameScreen extends AppCompatActivity {
                         // Performs a scan if mine has already been revealed
                         else if(cellManager.hasStarAndClicked(FINAL_ROW, FINAL_COL)) {
                             cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
-                            scanMinusOne(FINAL_ROW, FINAL_COL);
+                            scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
                         }
 
