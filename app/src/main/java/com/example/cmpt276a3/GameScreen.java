@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.FileObserver;
@@ -53,7 +54,7 @@ public class GameScreen extends AppCompatActivity {
 
         buttons = new Button[options.getRow()][options.getColumn()];
         populateButtons();
-        callAlertMessage();
+//        callAlertMessage();
     }
 
     private void refreshScreen() {
@@ -66,6 +67,8 @@ public class GameScreen extends AppCompatActivity {
 
         TextView timesPlayed = findViewById(R.id.timesPlayed);
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateButtons() {
@@ -95,6 +98,8 @@ public class GameScreen extends AppCompatActivity {
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
 
+                final MediaPlayer mp = MediaPlayer.create(this, R.raw.sonar);
+
                 button.setOnClickListener(new View.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
@@ -112,6 +117,7 @@ public class GameScreen extends AppCompatActivity {
                             cellManager.markNoStarClicked(FINAL_ROW, FINAL_COL);
                             scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
+                            mp.start();
                         }
 
                         // Performs a scan if mine has already been revealed
@@ -119,10 +125,11 @@ public class GameScreen extends AppCompatActivity {
                             cellManager.markStarClicked(FINAL_ROW, FINAL_COL);
                             scan(FINAL_ROW, FINAL_COL);
                             scansUsed++;
+                            mp.start();
                         }
 
                         refreshScreen();
-//                        callAlertMessage();
+                        callAlertMessage();
                     }
                 });
 
