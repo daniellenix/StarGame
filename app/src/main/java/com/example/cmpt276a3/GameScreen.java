@@ -32,6 +32,9 @@ import android.widget.Toast;
 import com.example.cmpt276a3.model.CellManager;
 import com.example.cmpt276a3.model.Options;
 
+/**
+ * Game screen activity controls game grid buttons.
+ */
 public class GameScreen extends AppCompatActivity {
 
     private CellManager cellManager = CellManager.getInstance();
@@ -59,6 +62,7 @@ public class GameScreen extends AppCompatActivity {
         refreshScreen();
     }
 
+    // Updates text views for stars found and scans used
     private void refreshScreen() {
         TextView starsFound = findViewById(R.id.foundStars);
         int numStars = OptionsScreen.getNumberOfStars(this);
@@ -68,13 +72,13 @@ public class GameScreen extends AppCompatActivity {
         numOfScans.setText("# of scans used: " + scansUsed);
     }
 
-
-
+    // Populates game grid buttons
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
         cellManager.generateStarsRandomly();
 
+        // Loops through grid buttons
         for (int row = 0; row < options.getRow(); row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
@@ -87,7 +91,7 @@ public class GameScreen extends AppCompatActivity {
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
-                // adds buttons to each row and col
+                // Adds buttons to each row and col
                 final Button button = new Button(this);
                 button.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
@@ -98,6 +102,7 @@ public class GameScreen extends AppCompatActivity {
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
 
+                // Audio for when star is found and when scan is initiated
                 final MediaPlayer mp1 = MediaPlayer.create(this, R.raw.sonar);
                 final MediaPlayer mp2 = MediaPlayer.create(this, R.raw.twinkle);
 
@@ -106,7 +111,7 @@ public class GameScreen extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        // if cell has star
+                        // If cell has star
                         if(cellManager.hasStarNotClicked(FINAL_ROW, FINAL_COL)) {
                             showStar(FINAL_ROW, FINAL_COL);
                             foundStars++;
@@ -121,6 +126,7 @@ public class GameScreen extends AppCompatActivity {
                             scansUsed++;
                             mp1.start();
 
+                            // Buttons jump when scan occurs
                             for (int i = 0; i < options.getRow(); i++) {
                                 Animation anim = new AlphaAnimation(0.0f, 1.0f);
                                 anim.setDuration(50);
@@ -145,6 +151,7 @@ public class GameScreen extends AppCompatActivity {
                             scansUsed++;
                             mp1.start();
 
+                            // Buttons jump when scan occurs
                             for (int i = 0; i < options.getRow(); i++) {
                                 Animation anim = new AlphaAnimation(0.0f, 1.0f);
                                 anim.setDuration(50);
@@ -162,6 +169,7 @@ public class GameScreen extends AppCompatActivity {
                             }
                         }
 
+                        // Updates scan when star is found
                         for (int i = 0; i < options.getRow(); i++) {
                             if(cellManager.noStarAndClicked(i, FINAL_COL) || cellManager.hasStarScanned(i, FINAL_COL)) {
                                 scan(i, FINAL_COL);
@@ -185,7 +193,7 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
-
+    // Star image displays when button is pressed
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void showStar(int row, int col) {
 
@@ -203,6 +211,7 @@ public class GameScreen extends AppCompatActivity {
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
 
+    // Scans row and column of button pressed
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void scan(int row, int col) {
         Button button = buttons[row][col];
@@ -210,18 +219,6 @@ public class GameScreen extends AppCompatActivity {
         // Lock Button Sizes:
         lockButtonSizes();
         int scan = cellManager.scanRowAndCol(row, col);
-
-        // text on buttons once pressed
-        button.setText("" + scan);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void scanMinusOne(int row, int col) {
-        Button button = buttons[row][col];
-
-        // Lock Button Sizes:
-        lockButtonSizes();
-        int scan = cellManager.scanRowAndCol(row, col) - 1;
 
         // text on buttons once pressed
         button.setText("" + scan);
@@ -250,6 +247,7 @@ public class GameScreen extends AppCompatActivity {
         return true;
     }
 
+    // Activates alert message when player finds all stars
     private void callAlertMessage(){
         if (foundStars == options.getNumberOfStars()){
             FragmentManager manager = getSupportFragmentManager();

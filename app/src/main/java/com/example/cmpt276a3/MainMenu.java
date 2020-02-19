@@ -10,6 +10,9 @@ import android.widget.Button;
 
 import com.example.cmpt276a3.model.Options;
 
+/**
+ * Provides buttons to play game, click options or help.
+ */
 public class MainMenu extends AppCompatActivity {
 
     private Options options = Options.getInstance();
@@ -28,6 +31,7 @@ public class MainMenu extends AppCompatActivity {
         options();
         help();
 
+        // Default options, if nothing is selected
         options.setRow(4);
         options.setColumn(6);
         options.setNumberOfStars(6);

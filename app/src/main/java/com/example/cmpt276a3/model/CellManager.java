@@ -2,6 +2,9 @@ package com.example.cmpt276a3.model;
 
 import java.util.Random;
 
+/**
+ * Provides foundation for game grid.
+ */
 public class CellManager {
 
     private Cell[][] grid;
@@ -29,12 +32,7 @@ public class CellManager {
         return instance;
     }
 
-    //getters
-    public Cell[][] getGrid() {
-        return grid;
-    }
-
-    // generating the stars randomly across grid
+    // Places stars throughout the board
     public void generateStarsRandomly(){
 
         grid = new Cell[options.getRow()][options.getColumn()];
@@ -90,6 +88,11 @@ public class CellManager {
 
     }
 
+    public void markStarScanned(int row, int col) {
+        grid[row][col] = STAR_SCANNED;
+    }
+
+    // scans row and column for any stars that haven't been found
     public int scanRowAndCol(int row, int col) {
         int starCounter = 0;
 
@@ -105,9 +108,5 @@ public class CellManager {
             }
         }
         return starCounter;
-    }
-
-    public void markStarScanned(int row, int col) {
-        grid[row][col] = STAR_SCANNED;
     }
 }

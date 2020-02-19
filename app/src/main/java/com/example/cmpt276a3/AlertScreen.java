@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+/**
+ * Shows alert message once player finds all the stars.
+ */
 public class AlertScreen extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         // Create the view to show
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.activity_alert_message, null);
@@ -19,8 +23,8 @@ public class AlertScreen extends AppCompatDialogFragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 // Ends activity after being called
-                //TextView tv = (TextView) getActivity().findViewById(R.id.congrats_text);
                 getActivity().finish();
             }
         };

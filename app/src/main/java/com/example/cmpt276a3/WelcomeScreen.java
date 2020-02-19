@@ -14,12 +14,14 @@ import com.example.cmpt276a3.model.CellManager;
 
 import org.w3c.dom.Text;
 
+/**
+ * Animation and button to continue displayed.
+ */
 public class WelcomeScreen extends AppCompatActivity{
 
     ImageView star_circle;
     TextView bounceTextView;
     TextView fadeInTextView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

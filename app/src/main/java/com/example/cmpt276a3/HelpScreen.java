@@ -10,6 +10,9 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+/**
+ * Displays game info, authors and links.
+ */
 public class HelpScreen extends AppCompatActivity {
 
     public static Intent makeIntent(Context context) {
@@ -32,7 +35,8 @@ public class HelpScreen extends AppCompatActivity {
                 "<a href='https://www.flaticon.com/free-icon/star_616490?term=star&page=1&position=4'>https://www.flaticon.com/free-icon/star_616490?term=star&page=1&position=4</a> <br />" +
                 "<a href='https://www.flaticon.com/free-icon/tarot_867882?term=horoscope&page=1&position=23'>https://www.flaticon.com/free-icon/tarot_867882?term=horoscope&page=1&position=23</a> <br />" +
                 "<a href='https://www.flaticon.com/free-icon/sun_1137441?term=horoscope%20sun&page=1&position=5'>https://www.flaticon.com/free-icon/sun_1137441?term=horoscope%20sun&page=1&position=5</a> <br />" +
-                "<a href='https://www.bitmoji.com/'>https://www.bitmoji.com/</a> <br />");
+                "<a href='https://www.bitmoji.com/'>https://www.bitmoji.com/</a> <br />" +
+                "<a href='https://freesound.org/people/InspectorJ/sounds/411460/'>https://freesound.org/people/InspectorJ/sounds/411460/</a> <br />");
 
 
         HyperLink.setMovementMethod(LinkMovementMethod.getInstance());

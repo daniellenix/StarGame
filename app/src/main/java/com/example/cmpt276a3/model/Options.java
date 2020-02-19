@@ -1,5 +1,8 @@
 package com.example.cmpt276a3.model;
 
+/**
+ * Singleton class for selected row, column and # of stars for the game.
+ */
 public class Options {
     private int row;
     private int column;
