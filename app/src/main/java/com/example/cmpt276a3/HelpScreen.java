@@ -36,8 +36,8 @@ public class HelpScreen extends AppCompatActivity {
                 "<a href='https://www.flaticon.com/free-icon/tarot_867882?term=horoscope&page=1&position=23'>https://www.flaticon.com/free-icon/tarot_867882?term=horoscope&page=1&position=23</a> <br />" +
                 "<a href='https://www.flaticon.com/free-icon/sun_1137441?term=horoscope%20sun&page=1&position=5'>https://www.flaticon.com/free-icon/sun_1137441?term=horoscope%20sun&page=1&position=5</a> <br />" +
                 "<a href='https://www.bitmoji.com/'>https://www.bitmoji.com/</a> <br />" +
-                "<a href='https://freesound.org/people/InspectorJ/sounds/411460/'>https://freesound.org/people/InspectorJ/sounds/411460/</a> <br />");
-
+                "<a href='https://freesound.org/people/InspectorJ/sounds/411460/'>https://freesound.org/people/InspectorJ/sounds/411460/</a> <br />" +
+                "<a href='http://clipart-library.com/clip-art/transparent-stars-background-25.html'>http://clipart-library.com/clip-art/transparent-stars-background-25.html</a> <br /> ");
 
         HyperLink.setMovementMethod(LinkMovementMethod.getInstance());
         HyperLink.setText(Text);

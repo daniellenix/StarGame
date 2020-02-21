@@ -32,9 +32,24 @@ public class MainMenu extends AppCompatActivity {
         help();
 
         // Default options, if nothing is selected
-        options.setRow(4);
-        options.setColumn(6);
-        options.setNumberOfStars(6);
+        int numStars = OptionsScreen.getNumberOfStars(this);
+        String boardSize = OptionsScreen.getBoardSize(this);
+
+        switch (boardSize) {
+            case "4x6":
+                options.setRow(4);
+                options.setColumn(6);
+                break;
+            case "5x10":
+                options.setRow(5);
+                options.setColumn(10);
+                break;
+            case "6x15":
+                options.setRow(6);
+                options.setColumn(15);
+                break;
+        }
+        options.setNumberOfStars(numStars);
     }
 
     private void playGame() {
